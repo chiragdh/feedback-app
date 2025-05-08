@@ -6,18 +6,18 @@ function App() {
   const [message, setMessage] = useState('');
   const [feedbackHistory, setFeedbackHistory] = useState([]);
 
-  // Handle input change for feedback
+  // LIVE BACKEND URL
+  const BASE_URL = 'https://feedback-app-qxrj.onrender.com'; // <-- Replace with your actual URL
+
   const handleChange = (event) => {
     setMessage(event.target.value);
   };
 
-  // Handle feedback form submission
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Send feedback to the backend
     axios
-      .post('http://localhost:3000/feedback', { message })
+      .post(`${BASE_URL}/feedback`, { message })
       .then((response) => {
         if (response.status === 200) {
           alert('Feedback received!');
@@ -30,10 +30,9 @@ function App() {
       });
   };
 
-  // Fetch feedback history from the backend
   const handleGetHistory = () => {
     axios
-      .get('http://localhost:3000/feedback')
+      .get(`${BASE_URL}/feedback`)
       .then((response) => {
         setFeedbackHistory(response.data);
       })
@@ -47,7 +46,6 @@ function App() {
     <div className="App">
       <h1>Feedback App</h1>
 
-      {/* Feedback Form */}
       <form onSubmit={handleSubmit}>
         <textarea
           value={message}
@@ -58,10 +56,8 @@ function App() {
         <button type="submit">Submit Feedback</button>
       </form>
 
-      {/* Show Feedback History Button */}
       <button onClick={handleGetHistory}>Show Feedback History</button>
 
-      {/* Display Feedback History */}
       <div>
         {feedbackHistory.length > 0 && (
           <ul>

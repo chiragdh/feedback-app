@@ -5,7 +5,10 @@ const db = new sqlite3.Database('./feedback.db');
 require('./db'); // runs db.js to create the table
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'https://chiragdh.github.io/feedback-app/', // ✅ Replace with your actual GitHub Pages domain
+  methods: ['GET', 'POST'],
+}));
 app.use(express.json());
 
 app.post('/feedback', (req, res) => {
