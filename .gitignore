@@ -1,0 +1,10 @@
+node_modules/
+client/node_modules/
+server/node_modules/
+client/build/
+server/dist/
+*.log
+server/feedback.db
+.DS_Store
+Thumbs.db
+.env
